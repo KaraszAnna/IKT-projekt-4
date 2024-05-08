@@ -1,7 +1,7 @@
 '''
 Nyiss egy terminált:
     Vagy beírod hogy cmd a keresőbe és rányomsz arra ami felugrik, vagy
-    Visual studioban bal fent Go mellett "..." -> "Terminal" -> New terminal
+    Visual studioban bal fent "Go" mellett "..." -> "Terminal" -> New terminal
     Ennek a shortcutja egyébként Ctrl+Shift+ő
 
     Ha ez megvan, írd be ezt a sort:
@@ -14,19 +14,19 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 import pygame
 import random
 
-# Initialize Pygame
+# Python inicializálása, szignálása
 pygame.init()
 
-# Set up the window
+# Kijelző beállítása
 window_width = 800
 window_height = 600
 window = pygame.display.set_mode((window_width, window_height))
 pygame.display.set_caption("Rios játék")
 
-# Set up the game clock
+# Játék képkockáinak beállítása
 clock = pygame.time.Clock()
 
-# Set up the game objects
+# Játék elemeinek beállítása
 player_width = 50
 player_height = 50
 player_x = window_width / 2 - player_width / 2
@@ -46,60 +46,60 @@ lives = 3
 font = pygame.font.SysFont(None, 30)
 game_over = False
 
-# Set up the background
+# Háttér beállítása
 background_image = pygame.image.load('kepek/hatter.jpg')
 
-# Set up the player
+# Játékos megrajzolása
 player_image = pygame.image.load('kepek/jatekos.png')
 player_image = pygame.transform.scale(player_image, (player_width, player_height))
 
-# Set up the bird object
+# Madár megrajzolása
 bird_image = pygame.image.load('kepek/madar.png')
 bird_image = pygame.transform.scale(bird_image, (bird_size, bird_size))
 
-# Set up the obstacle object
+# Akadály megrajzolása
 obstacle_image = pygame.image.load('kepek/akadaly.png')
 obstacle_image = pygame.transform.scale(obstacle_image, (obstacle_width, obstacle_height))
 
-# Set up the life panel
+# Hátralévő életek beállítása
 life_font = pygame.font.SysFont(None, 30)
 life_text = life_font.render("hátralévő életek: " + str(lives), True, (255, 255, 255))
 life_panel_x = window_width - life_text.get_width() - 10
 life_panel_y = 10
 
-# Set up the score panel
+# Pontszám beállítása
 score_font = pygame.font.SysFont(None, 30)
 score_text = score_font.render("pontszám: " + str(score), True, (255, 255, 255))
 score_panel_x = 10
 score_panel_y = 10
 
-# Main game loop
+# Főprogram
 while not game_over:
-    # Handle user input
+    # Felhasználói bevitel kezelése
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game_over = True
 
-    # Move the player
+    # Játékos irányítása
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         player_x -= player_speed
     elif keys[pygame.K_RIGHT]:
         player_x += player_speed
 
-    # Keep the player within the border
+    # Játékos pályán való maradása, a pálya vízszintes határainak beállítása
     if player_x < 0:
         player_x = 0
     elif player_x > window_width - player_width:
         player_x = window_width - player_width
 
-    # Move the bird
+    # Madár mozgása
     bird_y += bird_speed
 
-    # Move the obstacle
+    # Akadály mozgása
     obstacle_y += obstacle_speed
 
-    # Check for collisions
+    # Interakciók beállítása
     player_rect = pygame.Rect(player_x, player_y, player_width, player_height)
     bird_rect = pygame.Rect(bird_x, bird_y, bird_size, bird_size)
     obstacle_rect = pygame.Rect(obstacle_x, obstacle_y, obstacle_width, obstacle_height)
@@ -114,23 +114,23 @@ while not game_over:
         obstacle_x = random.randint(0, window_width - obstacle_width)
         obstacle_y = -obstacle_height
 
-    # Check if the bird is off the screen
+    # Madár pályára való hozatala
     if bird_y > window_height:
         bird_x = random.randint(bird_size, window_width - bird_size)
         bird_y = -bird_size
 
-    # Check if the obstacle is off the screen
+    # Akadály pályára való hozatala
     if obstacle_y > window_height:
         obstacle_x = random.randint(0, window_width - obstacle_width)
         obstacle_y = -obstacle_height
 
-    # Update the life panel
+    # Hátralévő életek számolása
     life_text = life_font.render("hátralévő életek: " + str(lives), True, (255, 255, 255))
 
-    # Update the score text
+    # Pontszám frissítése
     score_text = score_font.render("pontszám: " + str(score), True, (255, 255, 255))
 
-    # Draw everything
+    # Kijelzőre hozás
     window.blit(background_image, (0, 0))
     window.blit(player_image, (player_x, player_y))
     window.blit(bird_image, (bird_x, bird_y))
@@ -139,12 +139,12 @@ while not game_over:
     window.blit(score_text, (score_panel_x, score_panel_y))
     pygame.display.update()
 
-    # Cap the frame rate
+    # FPS limitelése
     clock.tick(60)
 
-# Print the final score and number of lives
+# Játék végén a ponthatár és hátralévő életek számának a kiírása
 print("elért pontszám: " + str(score))
 print("hátralévő életek: " + str(lives))
 
-# Exit the game
+# Játékból való kilépés
 pygame.quit()
