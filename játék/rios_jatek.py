@@ -21,7 +21,7 @@ pygame.init()
 window_width = 800
 window_height = 600
 window = pygame.display.set_mode((window_width, window_height))
-pygame.display.set_caption("Rios játék")
+pygame.display.set_caption("Arakari")
 
 # Játék képkockáinak beállítása
 clock = pygame.time.Clock()
