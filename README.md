@@ -10,6 +10,6 @@ Másodszor, itt van pár instrukció a játék hatékony futása érdekében:
     megnyitod a rios_jatek.py nevezetű python fájlt
 2. Figyelmesen olvasd el az utasításokat a kód elején (""" közti szöveg """):
     Ne töröld a kommenteket, később jól jöhet, ha újra játszanál vele
-3. Ha van valami gebasz akk itt van post ami a problémához kapcsolódhat:
+3. A játék csakis szórakoztatás céljából készült, értékesíteni vagy módosítani szigorúan tilos engedély nélkül!
 
 Jó játékot:) !
